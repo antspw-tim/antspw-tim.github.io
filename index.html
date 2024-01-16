@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>antspw_game_test</title>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
-    <script src="script.js" defer></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
+
 <body>
-    <h1>hello world!</h1>
-    <h2>test!!!</h2>
-    <script>
-        window.onload = function() {
-            initializeLiff('2002831974-oaMLXlv9');
-        };
-    </script>
+    <h1>用戶資料</h1>
+    <div id="profile">
+        <div id="displayName"></div>
+        <img id="pictureUrl" src="" alt="Profile Picture" />
+        <div id="userId"></div>
+        <div id="statusMessage"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
