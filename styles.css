@@ -5,6 +5,44 @@ body {
     padding-top: 20px;
 }
 
+#user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#user-info img {
+    width: 50px;
+    /* 或您想要的大小 */
+    height: 50px;
+    /* 與寬度保持一致以保持圖片比例 */
+    border-radius: 50%;
+    /* 圓形頭像 */
+    margin-right: 10px;
+}
+
+#user-details {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#user-details span {
+    margin-right: 5px;
+    /* 在資訊間添加一些間隔 */
+    font-size: 16px;
+    /* 或您喜歡的大小 */
+}
+
+#userId {
+    font-weight: bold;
+}
+
+#statusMessage {
+    font-style: italic;
+}
+
 .button-group {
     margin-bottom: 15px;
 }

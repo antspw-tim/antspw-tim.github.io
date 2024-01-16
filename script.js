@@ -10,7 +10,7 @@ liff.init({
         }).catch(err => {
             console.error('獲取用戶資料失敗', err);
         });
-    } else {
+    } else {Ｉ
         // 用戶未登入，引導用戶登入
         liff.login();
     }
