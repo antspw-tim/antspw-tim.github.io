@@ -22,26 +22,8 @@ body {
     margin-right: 10px;
 }
 
-#user-details {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-}
-
-#user-details span {
-    margin-right: 5px;
-    /* 在資訊間添加一些間隔 */
+#displayName {
     font-size: 16px;
-    /* 或您喜歡的大小 */
-}
-
-#userId {
-    font-weight: bold;
-}
-
-.user-id {
-    font-size: 10px;
-    /* 或任何較小的大小 */
 }
 
 .button-group {

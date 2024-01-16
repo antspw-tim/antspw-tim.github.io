@@ -5,7 +5,8 @@ liff.init({
         liff.getProfile().then(profile => {
             document.getElementById('displayName').textContent = profile.displayName;
             document.getElementById('pictureUrl').src = profile.pictureUrl;
-            document.getElementById('userId').textContent = 'ID: ' + profile.userId;
+            document.getElementById('userId').textContent = '用戶ID: ' + profile.userId;
+            document.getElementById('statusMessage').textContent = '狀態消息: ' + profile.statusMessage;
         }).catch(err => {
             console.error('獲取用戶資料失敗', err);
         });
