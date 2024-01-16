@@ -39,9 +39,9 @@ body {
     font-weight: bold;
 }
 
-#statusMessage {
-    font-style: italic;
-    display: block;
+.user-id {
+    font-size: 10px;
+    /* 或任何較小的大小 */
 }
 
 .button-group {
@@ -136,7 +136,4 @@ body {
 
 .shaking {
     animation: shakeAnimation 0.3s ease-in-out infinite;
-}
-.user-id {
-    font-size: 14px; /* 或任何較小的大小 */
 }
