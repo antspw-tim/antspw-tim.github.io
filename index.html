@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+    liff.init({
+        liffId: '2002831974-Xw2gvqPM'
+    }).then(() => {
+        console.log(liff.isLoggedIn());  // 判斷開啟此網頁的 LINE 使用者是否為登入狀態
+    });
+    </script>
     <h1>hello world!</h1>
     <h2>123</h2>
 </body>
