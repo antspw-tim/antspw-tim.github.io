@@ -1,22 +1,42 @@
 liff.init({
-    liffId: '2002831974-oaMLXlv9'
+    liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
 }).then(() => {
-    if (liff.isLoggedIn()) {
+    if (!liff.isLoggedIn()) {
+        // 用户未登录，显示登录屏幕
+        showLoginScreen();
+    } else {
+        // 用户已登录，获取用户信息
         liff.getProfile().then(profile => {
-            document.getElementById('displayName').textContent = profile.displayName;
-            document.getElementById('pictureUrl').src = profile.pictureUrl;
-            document.getElementById('userId').textContent = '用戶ID: ' + profile.userId;
-            document.getElementById('statusMessage').textContent = '狀態消息: ' + profile.statusMessage;
+            displayUserInfo(profile);
         }).catch(err => {
-            console.error('獲取用戶資料失敗', err);
+            console.error('获取用户资料失败', err);
         });
-    } else {Ｉ
-        // 用戶未登入，引導用戶登入
-        liff.login();
     }
 }).catch(err => {
     console.error('LIFF Initialization failed', err);
 });
+
+function showLoginScreen() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('game-screen').style.display = 'none';
+}
+
+function startGame() {
+    if (!liff.isLoggedIn()) {
+        // 如果用户未登录，引导用户登录
+        liff.login();
+    } else {
+        // 用户已登录，开始游戏
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+    }
+}
+
+function displayUserInfo(profile) {
+    document.getElementById('displayName').textContent = profile.displayName;
+    document.getElementById('pictureUrl').src = profile.pictureUrl;
+    // 可以添加更多用户信息的显示
+}
 
 let drinkIngredients = [];
 
@@ -48,15 +68,4 @@ function startShaking() {
         document.getElementById("drink-result").innerHTML += "<br>完成！";
         drinkIngredients = [];
     }, 2000);
-}
-
-function startGame() {
-    if (!liff.isLoggedIn()) {
-        // 如果用戶未登入，引導用戶登入
-        liff.login();
-    } else {
-        // 用戶已登入，開始遊戲
-        document.getElementById('start-screen').style.display = 'none'; // 隱藏開始畫面
-        // 此處添加其他開始遊戲的邏輯
-    }
 }
