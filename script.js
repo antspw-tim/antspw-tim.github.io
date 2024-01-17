@@ -69,3 +69,34 @@ function startShaking() {
         drinkIngredients = [];
     }, 2000);
 }
+
+function sendDataToGoogleSheet(profile) {
+    const playDate = new Date().toLocaleDateString();
+    const playTime = new Date().toLocaleTimeString();
+
+    const data = {
+        playTime: playTime,
+        playDate: playDate,
+        userId: profile.userId,
+        displayName: profile.displayName,
+        pictureUrl: profile.pictureUrl,
+        statusMessage: profile.statusMessage
+        // ... 其他字段
+    };
+
+    fetch('[https://script.google.com/macros/s/AKfycbwrb9Pkv_Nt27JqOO6BAqTojtA9h8AndIrG486ShqaE4UQzYYBtesP7dTP9nVhQ8vxD/exec]', { // 替换为您的 Apps Script URL
+        method: 'POST',
+        contentType: 'application/json',
+        payload: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch((error) => console.error('Error:', error));
+}
+
+liff.getProfile().then(profile => {
+    displayUserInfo(profile);
+    sendDataToGoogleSheet(profile); // 发送数据
+}).catch(err => {
+    console.error('获取用户资料失败', err);
+});
