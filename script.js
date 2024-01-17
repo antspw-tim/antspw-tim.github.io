@@ -50,3 +50,13 @@ function startShaking() {
     }, 2000);
 }
 
+function startGame() {
+    if (!liff.isLoggedIn()) {
+        // 如果用戶未登入，引導用戶登入
+        liff.login();
+    } else {
+        // 用戶已登入，開始遊戲
+        document.getElementById('start-screen').style.display = 'none'; // 隱藏開始畫面
+        // 此處添加其他開始遊戲的邏輯
+    }
+}
