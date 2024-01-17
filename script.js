@@ -1,72 +1,43 @@
-// LIFF 初始化
 liff.init({
     liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
 }).then(() => {
     if (!liff.isLoggedIn()) {
+        // 用户未登录，显示登录屏幕
         showLoginScreen();
     } else {
-        fetchUserProfile();
+        // 用户已登录，获取用户信息
+        liff.getProfile().then(profile => {
+            displayUserInfo(profile);
+        }).catch(err => {
+            console.error('获取用户资料失败', err);
+        });
     }
-}).catch(err => console.error('LIFF Initialization failed', err));
+}).catch(err => {
+    console.error('LIFF Initialization failed', err);
+});
 
-// 显示登录屏幕
 function showLoginScreen() {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('game-screen').style.display = 'none';
 }
 
-// 开始游戏的函数
 function startGame() {
     if (!liff.isLoggedIn()) {
+        // 如果用户未登录，引导用户登录
         liff.login();
     } else {
+        // 用户已登录，开始游戏
         document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('game-screen').style.display = 'flex';
-        fetchUserProfile();
+        document.getElementById('game-screen').style.display = 'block';
     }
 }
 
-// 获取并展示用户资料
-function fetchUserProfile() {
-    liff.getProfile().then(profile => {
-        displayUserInfo(profile);
-        sendDataToGoogleSheet(profile);
-    }).catch(err => console.error('获取用户资料失败', err));
-}
-
-// 显示用户信息
 function displayUserInfo(profile) {
     document.getElementById('displayName').textContent = profile.displayName;
     document.getElementById('pictureUrl').src = profile.pictureUrl;
+    // 可以添加更多用户信息的显示
 }
 
-// 发送数据到 Google Sheets
-function sendDataToGoogleSheet(profile) {
-    const playDate = new Date().toLocaleDateString();
-    const playTime = new Date().toLocaleTimeString();
-
-    const data = {
-        playTime: playTime,
-        playDate: playDate,
-        userId: profile.userId,
-        displayName: profile.displayName,
-        pictureUrl: profile.pictureUrl,
-        statusMessage: profile.statusMessage
-    };
-
-    fetch('https://script.google.com/macros/s/AKfycbwrb9Pkv_Nt27JqOO6BAqTojtA9h8AndIrG486ShqaE4UQzYYBtesP7dTP9nVhQ8vxD/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => console.log('Success:', data))
-    .catch(error => console.error('Error:', error));
-}
-
-// 游戏逻辑相关的函数
 let drinkIngredients = [];
 
 function addIngredient(ingredient, color) {

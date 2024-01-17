@@ -14,8 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    /* 确保在最前面 */
+    z-index: 1000; /* 确保在最前面 */
 }
 
 #login-screen img {
@@ -93,21 +92,15 @@ body {
     animation: addIngredient 2s ease forwards;
 }
 
-.shaking {
-    animation: shakeAnimation 0.3s ease-in-out infinite;
-}
-
 @keyframes addIngredient {
     0% {
         bottom: -20px;
         opacity: 1;
     }
-
     50% {
         bottom: 180px;
         opacity: 1;
     }
-
     100% {
         bottom: 120px;
         opacity: 0;
@@ -118,21 +111,20 @@ body {
     0% {
         transform: translate(0, 0);
     }
-
     25% {
         transform: translate(-10px, -5px);
     }
-
     50% {
         transform: translate(10px, 5px);
     }
-
     75% {
         transform: translate(-5px, -10px);
     }
-
     100% {
         transform: translate(5px, 10px);
-
     }
+}
+
+.shaking {
+    animation: shakeAnimation 0.3s ease-in-out infinite;
 }
