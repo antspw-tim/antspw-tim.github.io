@@ -3,20 +3,36 @@ liff.init({
     liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
 }).then(() => {
     if (!liff.isLoggedIn()) {
-        // 用户未登录，引导用户登录
+        showLoginScreen();
+    } else {
+        fetchUserProfile();
+    }
+}).catch(err => console.error('LIFF Initialization failed', err));
+
+// 显示登录屏幕
+function showLoginScreen() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('game-screen').style.display = 'none';
+}
+
+// 开始游戏的函数
+function startGame() {
+    if (!liff.isLoggedIn()) {
         liff.login();
     } else {
-        // 用户已登录，获取用户信息
-        liff.getProfile().then(profile => {
-            displayUserInfo(profile);
-            sendDataToGoogleSheet(profile);
-        }).catch(err => {
-            console.error('获取用户资料失败', err);
-        });
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'flex';
+        fetchUserProfile();
     }
-}).catch(err => {
-    console.error('LIFF Initialization failed', err);
-});
+}
+
+// 获取并展示用户资料
+function fetchUserProfile() {
+    liff.getProfile().then(profile => {
+        displayUserInfo(profile);
+        sendDataToGoogleSheet(profile);
+    }).catch(err => console.error('获取用户资料失败', err));
+}
 
 // 显示用户信息
 function displayUserInfo(profile) {
@@ -50,7 +66,7 @@ function sendDataToGoogleSheet(profile) {
     .catch(error => console.error('Error:', error));
 }
 
-// 游戏逻辑
+// 游戏逻辑相关的函数
 let drinkIngredients = [];
 
 function addIngredient(ingredient, color) {
