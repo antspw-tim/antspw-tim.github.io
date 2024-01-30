@@ -85,22 +85,29 @@ gapi.load('client', function() {
 function recordButtonClick(buttonName, sweetness, ice) {
     var lineProfile = getLineProfile();
     var values = [
-        [new Date(), lineProfile.userId, lineProfile.displayName, buttonName]
+        [new Date().toLocaleString(), lineProfile.displayName, lineProfile.userId, buttonName]
     ];
-    var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 替換為你的 Google Sheets 表格的 ID
-    var range = 'Sheet1!A:F'; // 確保儲存的數據寬度足夠
+    var spreadsheetId = 'YOUR_SPREADSHEET_ID'; // 替換為你的 Google Sheets 表格的 ID
+    var range = 'Sheet1!A:D'; // 確保儲存的數據寬度足夠
 
-    var request = gapi.client.sheets.spreadsheets.values.append({
+    var params = {
         spreadsheetId: spreadsheetId,
         range: range,
-        valueInputOption: 'RAW',
-        resource: { values: values }
-    });
+        valueInputOption: 'USER_ENTERED',
+        resource: {
+            values: values
+        }
+    };
 
-    request.execute(function(response) {
+    var request = gapi.client.sheets.spreadsheets.values.append(params);
+
+    request.then(function(response) {
         console.log('Button click information recorded in Google Sheets');
+    }, function(reason) {
+        console.error('Error: ' + reason.result.error.message);
     });
 }
+
 
 function getLineProfile() {
     if (liff.isLoggedIn()) {
