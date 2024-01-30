@@ -42,7 +42,6 @@ let drinkIngredients = [];
 
 function addIngredient(ingredient, color) {
     drinkIngredients.push(ingredient);
-    recordButtonClick(ingredient); // 新增的行：記錄按鈕點擊信息到 Google Sheets
     updateDrinkDisplay();
     animateIngredient(color);
 }
@@ -71,11 +70,12 @@ function startShaking() {
     }, 2000);
 }
 
+
 // 新的 JavaScript 代碼，用於 Google Sheets API
 function recordButtonClick(buttonName) {
-    var values = [[new Date(), buttonName, getLineProfile()]]; // 將用戶 LINE 資訊添加到儲存的數據中
+    var values = [[new Date(), buttonName]];
     var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 替換為你的 Google Sheets 表格的 ID
-    var range = 'Sheet1!A:C'; // 確保儲存的數據寬度足夠
+    var range = 'Sheet1!A:B';
 
     var request = gapi.client.sheets.spreadsheets.values.append({
         spreadsheetId: spreadsheetId,
@@ -87,20 +87,4 @@ function recordButtonClick(buttonName) {
     request.execute(function(response) {
         console.log('Button click information recorded in Google Sheets');
     });
-}
-
-function getLineProfile() {
-    if (liff.isLoggedIn()) {
-        return {
-            userId: liff.getContext().userId,
-            displayName: liff.getContext().displayName,
-            pictureUrl: liff.getContext().profilePicture
-        };
-    } else {
-        return {
-            userId: 'Not Logged In',
-            displayName: 'Not Logged In',
-            pictureUrl: 'Not Logged In'
-        };
-    }
 }
