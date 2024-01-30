@@ -21,19 +21,9 @@
         </div>
         <h1>蟻力手作工坊</h1>
         <div id="drink-options" class="button-group">
-            <button onclick="addIngredient('奶茶', '#d32f2f')">奶茶</button>
-            <button onclick="addIngredient('紅茶', '#388e3c')">紅茶</button>
-            <button onclick="addIngredient('綠茶', '#fbc02d')">綠茶</button>
-        </div>
-        <div id="topping-options" class="button-group">
-            <button onclick="addIngredient('正常冰', '#795548')">正常冰</button>
-            <button onclick="addIngredient('少冰', '#0097a7')">少冰</button>
-            <button onclick="addIngredient('去冰', '#7b1fa2')">去冰</button>
-        </div>
-        <div id="ice-options" class="button-group">
-            <button onclick="addIngredient('全糖', '#1976d2')">全糖</button>
-            <button onclick="addIngredient('半糖', '#1976d2')">半糖</button>
-            <button onclick="addIngredient('無糖', '#1976d2')">無糖</button>
+            <button onclick="addIngredient('奶茶', '#d32f2f', '全糖', '正常冰')">奶茶</button>
+            <button onclick="addIngredient('紅茶', '#388e3c', '半糖', '少冰')">紅茶</button>
+            <button onclick="addIngredient('綠茶', '#fbc02d', '無糖', '去冰')">綠茶</button>
         </div>
         <button id="shake-button" onclick="startShaking()">搖起來</button>
         <div id="shaker-container" class="shaker"></div>
@@ -46,7 +36,7 @@
         // Google Sheets API 初始化
         gapi.load('client', function() {
             gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
+                apiKey: 'AIzaSyDe1rnIM6BW9D6RMrogKoQ_fSUltZt-wfk',
                 discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
             }).then(function() {
                 console.log('Google Sheets API initialized');
