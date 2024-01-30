@@ -42,7 +42,6 @@ let drinkIngredients = [];
 
 function addIngredient(ingredient, color) {
     drinkIngredients.push(ingredient);
-    recordButtonClick(ingredient);
     updateDrinkDisplay();
     animateIngredient(color);
 }
@@ -70,6 +69,7 @@ function startShaking() {
         drinkIngredients = [];
     }, 2000);
 }
+
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
 function recordButtonClick(buttonName, sweetness, ice) {
