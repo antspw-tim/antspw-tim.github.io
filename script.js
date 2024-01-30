@@ -71,11 +71,21 @@ function startShaking() {
 }
 
 
+// Google Sheets API 初始化
+gapi.load('client', function() {
+    gapi.client.init({
+        apiKey: 'YOUR_API_KEY',
+        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+    }).then(function() {
+        console.log('Google Sheets API initialized');
+    });
+});
+
 // 新的 JavaScript 代碼，用於 Google Sheets API
 function recordButtonClick(buttonName, sweetness, ice) {
     var lineProfile = getLineProfile();
     var values = [
-        [new Date(), lineProfile.displayName, lineProfile.userId, buttonName, sweetness, ice]
+        [new Date(), lineProfile.userId, lineProfile.displayName, buttonName]
     ];
     var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 替換為你的 Google Sheets 表格的 ID
     var range = 'Sheet1!A:F'; // 確保儲存的數據寬度足夠
