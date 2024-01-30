@@ -40,9 +40,9 @@ function displayUserInfo(profile) {
 
 let drinkIngredients = [];
 
-function addIngredient(ingredient, color, sweetness, ice) {
+function addIngredient(ingredient, color) {
     drinkIngredients.push(ingredient);
-    recordButtonClick(ingredient, sweetness, ice);
+    recordButtonClick(ingredient);
     updateDrinkDisplay();
     animateIngredient(color);
 }
