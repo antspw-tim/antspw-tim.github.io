@@ -69,22 +69,3 @@ function startShaking() {
         drinkIngredients = [];
     }, 2000);
 }
-
-
-// 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(buttonName) {
-    var values = [[new Date(), buttonName]];
-    var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 替換為你的 Google Sheets 表格的 ID
-    var range = 'Sheet1!A:B';
-
-    var request = gapi.client.sheets.spreadsheets.values.append({
-        spreadsheetId: spreadsheetId,
-        range: range,
-        valueInputOption: 'RAW',
-        resource: { values: values }
-    });
-
-    request.execute(function(response) {
-        console.log('Button click information recorded in Google Sheets');
-    });
-}
