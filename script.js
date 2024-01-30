@@ -72,13 +72,10 @@ function startShaking() {
 }
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(buttonName, sweetness, ice) {
-    var lineProfile = getLineProfile();
-    var values = [
-        [new Date(), lineProfile.displayName, lineProfile.userId, buttonName, sweetness, ice]
-    ];
+function recordButtonClick(buttonName) {
+    var values = [[new Date(), buttonName, getLineProfile()]]; // 將用戶 LINE 資訊添加到儲存的數據中
     var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 替換為你的 Google Sheets 表格的 ID
-    var range = 'Sheet1!A:F'; // 確保儲存的數據寬度足夠
+    var range = 'Sheet1!A:C'; // 確保儲存的數據寬度足夠
 
     var request = gapi.client.sheets.spreadsheets.values.append({
         spreadsheetId: spreadsheetId,
