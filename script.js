@@ -82,11 +82,11 @@ gapi.load('client', function() {
 });
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(buttonName) {
+function recordButtonClick(ingredient) {
     var lineProfile = getLineProfile();
     var timestamp = new Date().toLocaleString();
     var values = [
-        [timestamp, lineProfile.displayName, lineProfile.userId, buttonName]
+        [timestamp, lineProfile.displayName, lineProfile.userId, ingredient]
     ];
     var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 您的 Google Sheets 表格的 ID
     var range = 'Sheet1!A:D'; // 写入数据的范围
