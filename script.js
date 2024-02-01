@@ -1,3 +1,13 @@
+// Google Sheets API 初始化
+gapi.load('client', function() {
+    gapi.client.init({
+        apiKey: 'AIzaSyBiPqVqKbkvtteTD8EEdN0FRMvZm5nVc44',
+        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+    }).then(function() {
+        console.log('Google Sheets API initialized');
+    });
+});
+
 liff.init({
     liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
 }).then(() => {
@@ -44,6 +54,9 @@ function addIngredient(ingredient, color) {
     drinkIngredients.push(ingredient);
     updateDrinkDisplay();
     animateIngredient(color);
+    
+    // 调用 recordButtonClick 函数记录用户选择的成分
+    recordButtonClick(ingredient);
 }
 
 function updateDrinkDisplay() {
@@ -69,17 +82,6 @@ function startShaking() {
         drinkIngredients = [];
     }, 2000);
 }
-
-
-// Google Sheets API 初始化
-gapi.load('client', function() {
-    gapi.client.init({
-        apiKey: 'AIzaSyBiPqVqKbkvtteTD8EEdN0FRMvZm5nVc44',
-        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-    }).then(function() {
-        console.log('Google Sheets API initialized');
-    });
-});
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
 function recordButtonClick(ingredient) {
@@ -107,8 +109,6 @@ function recordButtonClick(ingredient) {
     });
 }
 
-
-
 function getLineProfile() {
     if (liff.isLoggedIn()) {
         return {
@@ -122,5 +122,4 @@ function getLineProfile() {
             displayName: 'Not Logged In',
             pictureUrl: 'Not Logged In'
         };
-    }
-}
+   
