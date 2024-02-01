@@ -1,13 +1,3 @@
-// Google Sheets API 初始化
-gapi.load('client', function() {
-    gapi.client.init({
-        apiKey: 'AIzaSyBiPqVqKbkvtteTD8EEdN0FRMvZm5nVc44',
-        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-    }).then(function() {
-        console.log('Google Sheets API initialized');
-    });
-});
-
 liff.init({
     liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
 }).then(() => {
