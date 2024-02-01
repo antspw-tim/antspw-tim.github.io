@@ -82,13 +82,14 @@ gapi.load('client', function() {
 });
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(buttonName, sweetness, ice) {
+function recordButtonClick(buttonName) {
     var lineProfile = getLineProfile();
+    var timestamp = new Date().toLocaleString();
     var values = [
-        [new Date().toLocaleString(), lineProfile.displayName, lineProfile.userId, buttonName]
+        [timestamp, lineProfile.displayName, lineProfile.userId, buttonName]
     ];
-    var spreadsheetId = 'YOUR_SPREADSHEET_ID'; // 替換為你的 Google Sheets 表格的 ID
-    var range = 'Sheet1!A:D'; // 確保儲存的數據寬度足夠
+    var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 您的 Google Sheets 表格的 ID
+    var range = 'Sheet1!A:D'; // 写入数据的范围
 
     var params = {
         spreadsheetId: spreadsheetId,
@@ -99,14 +100,13 @@ function recordButtonClick(buttonName, sweetness, ice) {
         }
     };
 
-    var request = gapi.client.sheets.spreadsheets.values.append(params);
-
-    request.then(function(response) {
-        console.log('Button click information recorded in Google Sheets');
+    gapi.client.sheets.spreadsheets.values.append(params).then(function(response) {
+        console.log('Data recorded successfully in Google Sheets');
     }, function(reason) {
         console.error('Error: ' + reason.result.error.message);
     });
 }
+
 
 
 function getLineProfile() {
