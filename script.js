@@ -82,43 +82,30 @@ gapi.load('client', function() {
 });
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-// 定义用于记录按钮点击的函数，接收日期、用户的LINE名称、LINE ID 和 按钮名称作为参数
-function recordButtonClick(timestamp, lineDisplayName, lineUserId, buttonName) {
-    // 将记录数据存储为二维数组
+function recordButtonClick(ingredient) {
+    var lineProfile = getLineProfile();
+    var timestamp = new Date().toLocaleString();
     var values = [
-        [timestamp, lineDisplayName, lineUserId, buttonName]
+        [timestamp, lineProfile.displayName, lineProfile.userId, ingredient]
     ];
+    var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 您的 Google Sheets 表格的 ID
+    var range = 'Sheet1!A:D'; // 写入数据的范围
 
-    // 定义 Google Sheets API 请求参数
     var params = {
-        spreadsheetId: 'YOUR_SPREADSHEET_ID', // 您的 Google Sheets 表格的 ID
-        range: 'Sheet1!A:E', // 写入数据的范围
+        spreadsheetId: spreadsheetId,
+        range: range,
         valueInputOption: 'USER_ENTERED',
         resource: {
             values: values
         }
     };
 
-    // 执行 Google Sheets API 请求
     gapi.client.sheets.spreadsheets.values.append(params).then(function(response) {
         console.log('Data recorded successfully in Google Sheets');
     }, function(reason) {
         console.error('Error: ' + reason.result.error.message);
     });
 }
-
-// 每个按钮点击事件处理函数中调用记录函数
-function addIngredient(ingredient, color) {
-    // 获取当前日期时间
-    var timestamp = new Date().toLocaleString();
-
-    // 获取用户的LINE资料
-    var lineProfile = getLineProfile();
-
-    // 调用记录函数并传递日期、LINE名称、LINE ID 和 按钮名称作为参数
-    recordButtonClick(timestamp, lineProfile.displayName, lineProfile.userId, ingredient);
-}
-
 
 
 
