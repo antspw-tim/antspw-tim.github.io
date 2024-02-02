@@ -82,7 +82,7 @@ gapi.load('client', function() {
 });
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(ingredient, color) {
+function recordButtonClick(ingredient) {
     var lineProfile = getLineProfile();
     var timestamp = new Date().toLocaleString();
     var values = [
@@ -106,6 +106,7 @@ function recordButtonClick(ingredient, color) {
         console.error('Error: ' + reason.result.error.message);
     });
 }
+
 
 function getLineProfile() {
     if (liff.isLoggedIn()) {
