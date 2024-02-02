@@ -74,7 +74,7 @@ function startShaking() {
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
-        apiKey: 'AIzaSyBiPqVqKbkvtteTD8EEdN0FRMvZm5nVc44',
+        apiKey: 'AIzaSyBiPqVqKbkvtteTD8EEdN0FRMvZm5nVc44', // 您的 Google Sheets API 密钥
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
         console.log('Google Sheets API initialized');
@@ -82,7 +82,7 @@ gapi.load('client', function() {
 });
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(ingredient) {
+function recordButtonClick(ingredient, color) {
     var lineProfile = getLineProfile();
     var timestamp = new Date().toLocaleString();
     var values = [
@@ -106,8 +106,6 @@ function recordButtonClick(ingredient) {
         console.error('Error: ' + reason.result.error.message);
     });
 }
-
-
 
 function getLineProfile() {
     if (liff.isLoggedIn()) {
