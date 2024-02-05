@@ -70,7 +70,6 @@ function startShaking() {
     }, 2000);
 }
 
-
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
