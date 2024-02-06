@@ -6,6 +6,7 @@
     <title>蟻力手作工作</title>
     <link rel="stylesheet" href="styles.css">
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <!-- 添加 Google Sheets API JavaScript 文件 -->
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
@@ -22,19 +23,19 @@
         </div>
         <h1>蟻力手作工坊</h1>
         <div id="drink-options" class="button-group">
-            <button onclick="addIngredient('奶茶', '#d32f2f', window.profile);">奶茶</button>
-            <button onclick="addIngredient('紅茶', '#388e3c', window.profile);">紅茶</button>
-            <button onclick="addIngredient('綠茶', '#fbc02d', window.profile);">綠茶</button>
+            <button onclick="addIngredient('奶茶', '#d32f2f'); recordButtonClick('奶茶')">奶茶</button>
+            <button onclick="addIngredient('紅茶', '#388e3c'); recordButtonClick('紅茶')">紅茶</button>
+            <button onclick="addIngredient('綠茶', '#fbc02d'); recordButtonClick('綠茶')">綠茶</button>
         </div>
         <div id="topping-options" class="button-group">
-            <button onclick="addIngredient('正常冰', '#795548', window.profile);">正常冰</button>
-            <button onclick="addIngredient('少冰', '#0097a7', window.profile);">少冰</button>
-            <button onclick="addIngredient('去冰', '#7b1fa2', window.profile);">去冰</button>
+            <button onclick="addIngredient('正常冰', '#795548'); recordButtonClick('正常冰')">正常冰</button>
+            <button onclick="addIngredient('少冰', '#0097a7'); recordButtonClick('少冰')">少冰</button>
+            <button onclick="addIngredient('去冰', '#7b1fa2'); recordButtonClick('去冰')">去冰</button>
         </div>
         <div id="ice-options" class="button-group">
-            <button onclick="addIngredient('全糖', '#1976d2', window.profile);">全糖</button>
-            <button onclick="addIngredient('半糖', '#1976d2', window.profile);">半糖</button>
-            <button onclick="addIngredient('無糖', '#1976d2', window.profile);">無糖</button>
+            <button onclick="addIngredient('全糖', '#1976d2'); recordButtonClick('全糖')">全糖</button>
+            <button onclick="addIngredient('半糖', '#1976d2'); recordButtonClick('半糖')">半糖</button>
+            <button onclick="addIngredient('無糖', '#1976d2'); recordButtonClick('無糖')">無糖</button>
         </div>
         <button id="shake-button" onclick="startShaking()">搖起來</button>
         <div id="shaker-container" class="shaker"></div>
@@ -42,5 +43,48 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        liff.init({
+            liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
+        }).then(() => {
+            if (!liff.isLoggedIn()) {
+                // 用户未登录，显示登录屏幕
+                showLoginScreen();
+            } else {
+                // 用户已登录，获取用户信息
+                liff.getProfile().then(profile => {
+                    // 设置全局变量 window.profile
+                    window.profile = profile;
+                    displayUserInfo(profile);
+                }).catch(err => {
+                    console.error('获取用户资料失败', err);
+                });
+            }
+        }).catch(err => {
+            console.error('LIFF Initialization failed', err);
+        });
+
+        function showLoginScreen() {
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('game-screen').style.display = 'none';
+        }
+
+        function startGame() {
+            if (!liff.isLoggedIn()) {
+                // 如果用户未登录，引导用户登录
+                liff.login();
+            } else {
+                // 用户已登录，开始游戏
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('game-screen').style.display = 'block';
+            }
+        }
+
+        function displayUserInfo(profile) {
+            document.getElementById('displayName').textContent = profile.displayName;
+            document.getElementById('pictureUrl').src = profile.pictureUrl;
+            // 添加其他用户信息显示
+        }
+    </script>
 </body>
 </html>
