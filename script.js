@@ -7,6 +7,8 @@ liff.init({
     } else {
         // 用户已登录，获取用户信息
         liff.getProfile().then(profile => {
+            // 设置全局变量 window.profile
+            window.profile = profile;
             displayUserInfo(profile);
         }).catch(err => {
             console.error('获取用户资料失败', err);
@@ -35,7 +37,7 @@ function startGame() {
 function displayUserInfo(profile) {
     document.getElementById('displayName').textContent = profile.displayName;
     document.getElementById('pictureUrl').src = profile.pictureUrl;
-    // 可以添加更多用户信息的显示
+    // 添加其他用户信息显示
 }
 
 let drinkIngredients = [];
@@ -73,7 +75,7 @@ function startShaking() {
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
-        apiKey: '775395165834-293o515bo84mmn0f745a1l51d42hoprk.apps.googleusercontent.com', // 您的 Google Sheets API 密钥
+        apiKey: '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', // 您的 Google Sheets API 密钥
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
         console.log('Google Sheets API initialized');
@@ -106,7 +108,6 @@ function recordButtonClick(ingredient) {
     });
 }
 
-
 function getLineProfile() {
     if (liff.isLoggedIn()) {
         return {
@@ -122,38 +123,3 @@ function getLineProfile() {
         };
     }
 }
-
-
-/*
- * Create form to request access token from Google's OAuth 2.0 server.
- */
-function oauthSignIn() {
-    // Google's OAuth 2.0 endpoint for requesting an access token
-    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-  
-    // Create <form> element to submit parameters to OAuth 2.0 endpoint.
-    var form = document.createElement('form');
-    form.setAttribute('method', 'GET'); // Send as a GET request.
-    form.setAttribute('action', oauth2Endpoint);
-  
-    // Parameters to pass to OAuth 2.0 endpoint.
-    var params = {'client_id': '775395165834-293o515bo84mmn0f745a1l51d42hoprk.apps.googleusercontent.com',
-                  'redirect_uri': 'https://antspw-tim.github.ioI',
-                  'response_type': 'token',
-                  'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly',
-                  'include_granted_scopes': 'true',
-                  'state': 'pass-through value'};
-  
-    // Add form parameters as hidden input values.
-    for (var p in params) {
-      var input = document.createElement('input');
-      input.setAttribute('type', 'hidden');
-      input.setAttribute('name', p);
-      input.setAttribute('value', params[p]);
-      form.appendChild(input);
-    }
-  
-    // Add form to page and submit it to open the OAuth 2.0 endpoint.
-    document.body.appendChild(form);
-    form.submit();
-  }
