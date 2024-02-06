@@ -73,7 +73,7 @@ function startShaking() {
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
-        apiKey: 'AIzaSyBiPqVqKbkvtteTD8EEdN0FRMvZm5nVc44', // 您的 Google Sheets API 密钥
+        apiKey: '775395165834-293o515bo84mmn0f745a1l51d42hoprk.apps.googleusercontent.com', // 您的 Google Sheets API 密钥
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
         console.log('Google Sheets API initialized');
@@ -122,3 +122,38 @@ function getLineProfile() {
         };
     }
 }
+
+
+/*
+ * Create form to request access token from Google's OAuth 2.0 server.
+ */
+function oauthSignIn() {
+    // Google's OAuth 2.0 endpoint for requesting an access token
+    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+  
+    // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+    var form = document.createElement('form');
+    form.setAttribute('method', 'GET'); // Send as a GET request.
+    form.setAttribute('action', oauth2Endpoint);
+  
+    // Parameters to pass to OAuth 2.0 endpoint.
+    var params = {'client_id': '775395165834-293o515bo84mmn0f745a1l51d42hoprk.apps.googleusercontent.com',
+                  'redirect_uri': 'https://antspw-tim.github.ioI',
+                  'response_type': 'token',
+                  'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly',
+                  'include_granted_scopes': 'true',
+                  'state': 'pass-through value'};
+  
+    // Add form parameters as hidden input values.
+    for (var p in params) {
+      var input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', p);
+      input.setAttribute('value', params[p]);
+      form.appendChild(input);
+    }
+  
+    // Add form to page and submit it to open the OAuth 2.0 endpoint.
+    document.body.appendChild(form);
+    form.submit();
+  }
