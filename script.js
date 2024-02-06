@@ -1,3 +1,4 @@
+// liff.init 初始化
 liff.init({
     liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
 }).then(() => {
@@ -18,11 +19,13 @@ liff.init({
     console.error('LIFF Initialization failed', err);
 });
 
+// 显示登录屏幕
 function showLoginScreen() {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('game-screen').style.display = 'none';
 }
 
+// 开始游戏
 function startGame() {
     if (!liff.isLoggedIn()) {
         // 如果用户未登录，引导用户登录
@@ -34,24 +37,29 @@ function startGame() {
     }
 }
 
+// 显示用户信息
 function displayUserInfo(profile) {
     document.getElementById('displayName').textContent = profile.displayName;
     document.getElementById('pictureUrl').src = profile.pictureUrl;
     // 添加其他用户信息显示
 }
 
+// 初始化饮品列表
 let drinkIngredients = [];
 
+// 添加饮品成分
 function addIngredient(ingredient, color) {
     drinkIngredients.push(ingredient);
     updateDrinkDisplay();
     animateIngredient(color);
 }
 
+// 更新饮品显示
 function updateDrinkDisplay() {
     document.getElementById("drink-result").innerHTML = "加入了" + drinkIngredients.join(", ");
 }
 
+// 动画显示饮品成分
 function animateIngredient(color) {
     const ingredientEl = document.createElement('div');
     ingredientEl.className = 'ingredient';
@@ -63,6 +71,7 @@ function animateIngredient(color) {
     }, 2000);
 }
 
+// 开始摇饮品
 function startShaking() {
     document.getElementById("shaker-container").classList.add("shaking");
     setTimeout(() => {
@@ -82,7 +91,7 @@ gapi.load('client', function() {
     });
 });
 
-// 新的 JavaScript 代碼，用於 Google Sheets API
+// 记录按钮点击事件
 function recordButtonClick(ingredient) {
     liff.getProfile().then(profile => {
         var lineProfile = {
@@ -96,7 +105,7 @@ function recordButtonClick(ingredient) {
             [timestamp, profile.displayName, profile.userId, ingredient]
         ];
 
-        var spreadsheetId = 'YOUR_SPREADSHEET_ID';
+        var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w';
         var range = 'Sheet1!A:D';
 
         var params = {
@@ -118,6 +127,7 @@ function recordButtonClick(ingredient) {
     });
 }
 
+// 获取 LINE 用户信息
 function getLineProfile() {
     if (liff.isLoggedIn()) {
         return {
