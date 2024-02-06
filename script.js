@@ -81,11 +81,11 @@ gapi.load('client', function() {
 });
 
 // 新的 JavaScript 代碼，用於 Google Sheets API
-function recordButtonClick(ingredient) {
-    var lineProfile = getLineProfile();
+function recordButtonClick(ingredient, profile) {
+    var lineProfile = getLineProfile(profile);
     var timestamp = new Date().toLocaleString();
     var values = [
-        [timestamp, profile.displayName, lineProfile.userId, ingredient]
+        [timestamp, lineProfile.displayName, lineProfile.userId, ingredient]
     ];
     var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w'; // 您的 Google Sheets 表格的 ID
     var range = 'Sheet1!A:D'; // 写入数据的范围
@@ -106,13 +106,12 @@ function recordButtonClick(ingredient) {
     });
 }
 
-
-function getLineProfile() {
-    if (liff.isLoggedIn()) {
+function getLineProfile(profile) {
+    if (profile && profile.userId) {
         return {
-            userId: liff.getContext().userId,
-            displayName: liff.getContext().displayName,
-            pictureUrl: liff.getContext().profilePicture
+            userId: profile.userId,
+            displayName: profile.displayName,
+            pictureUrl: profile.pictureUrl
         };
     } else {
         return {
