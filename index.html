@@ -53,6 +53,8 @@
             } else {
                 // 用户已登录，获取用户信息
                 liff.getProfile().then(profile => {
+                    // 设置全局变量 window.profile
+                    window.profile = profile;
                     displayUserInfo(profile);
                 }).catch(err => {
                     console.error('获取用户资料失败', err);
@@ -82,8 +84,6 @@
             document.getElementById('displayName').textContent = profile.displayName;
             document.getElementById('pictureUrl').src = profile.pictureUrl;
             // 添加其他用户信息显示
-            // 调用 recordButtonClick 前确保 profile 已设置
-            window.profile = profile;
         }
     </script>
 </body>
