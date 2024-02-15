@@ -87,7 +87,7 @@ function startShaking() {
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
-        apiKey: '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', // 您的 Google Sheets API 密鑰
+        apiKey: 'AIzaSyA8uzcG_9dy9IXP1qMqRHhk0PuSiJ4Rn54', // 您的 Google Sheets API 密鑰
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
         console.log('Google Sheets API 初始化成功');
