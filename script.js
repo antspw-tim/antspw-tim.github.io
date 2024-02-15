@@ -87,20 +87,23 @@ function startShaking() {
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
-        apiKey: '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', // 您的 Google Sheets API 密鑰
+        apiKey: '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', // 您的 Google Sheets API 密鑰
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+        clientId: '799288511686-qv3bnmmt37rtseqdu7q7btplmqd0f79n.apps.googleusercontent.com', // 您的 OAuth 2.0 用戶端 ID
+        scope: 'https://www.googleapis.com/auth/spreadsheets', // 權限範圍，這裡指定為 Google Sheets
     }).then(function() {
         console.log('Google Sheets API 初始化成功');
         
-        // 在这里进行您的操作，确保 gapi.client.sheets 已经被正确初始化
+        // 在這裡進行您的操作，確保 gapi.client.sheets 已經被正確初始化
 
-        // Now that the API is loaded, you can execute the code that uses it
-        // For example, you can call functions that interact with Google Sheets
+        // 現在 API 已加載，您可以執行使用它的代碼
+        // 例如，您可以調用與 Google Sheets 互動的函數
 
     }).catch(function(error) {
         console.error('Google Sheets API 初始化失敗', error);
     });
 });
+
 
 // 記錄用戶行為數據
 function recordUserAction(action, ingredient = '') {
