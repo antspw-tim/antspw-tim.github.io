@@ -1,65 +1,65 @@
 // liff.init 初始化
 liff.init({
-    liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
+    liffId: '2002831974-oaMLXlv9' // 請替換為您的 LIFF ID
 }).then(() => {
     if (!liff.isLoggedIn()) {
-        // 用户未登录，显示登录屏幕
+        // 用戶未登錄，顯示登錄屏幕
         showLoginScreen();
     } else {
-        // 用户已登录，获取用户信息
+        // 用戶已登錄，獲取用戶信息
         liff.getProfile().then(profile => {
-            // 设置全局变量 window.profile
+            // 設置全局變量 window.profile
             window.profile = profile;
             displayUserInfo(profile);
         }).catch(err => {
-            console.error('获取用户资料失败', err);
+            console.error('獲取用戶資料失敗', err);
         });
     }
 }).catch(err => {
-    console.error('LIFF Initialization failed', err);
+    console.error('LIFF 初始化失敗', err);
 });
 
-// 显示登录屏幕
+// 顯示登錄屏幕
 function showLoginScreen() {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('game-screen').style.display = 'none';
 }
 
-// 开始游戏
+// 開始遊戲
 function startGame() {
     if (!liff.isLoggedIn()) {
-        // 如果用户未登录，引导用户登录
+        // 如果用戶未登錄，引導用戶登錄
         liff.login();
     } else {
-        // 用户已登录，开始游戏
+        // 用戶已登錄，開始遊戲
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('game-screen').style.display = 'block';
     }
 }
 
-// 显示用户信息
+// 顯示用戶信息
 function displayUserInfo(profile) {
     document.getElementById('displayName').textContent = profile.displayName;
     document.getElementById('pictureUrl').src = profile.pictureUrl;
-    // 添加其他用户信息显示
+    // 添加其他用戶信息顯示
 }
 
-// 初始化饮品列表
+// 初始化飲品列表
 let drinkIngredients = [];
 
-// 添加饮品成分
+// 添加飲品成分
 function addIngredient(ingredient, color) {
     drinkIngredients.push(ingredient);
     updateDrinkDisplay();
     animateIngredient(color);
 }
 
-// 更新饮品显示
+// 更新飲品顯示
 function updateDrinkDisplay() {
     document.getElementById("drink-result").innerHTML = "加入了" + drinkIngredients.join(", ");
 }
 
-// 动画显示饮品成分
+// 動畫顯示飲品成分
 function animateIngredient(color) {
     const ingredientEl = document.createElement('div');
     ingredientEl.className = 'ingredient';
@@ -71,7 +71,7 @@ function animateIngredient(color) {
     }, 2000);
 }
 
-// 开始摇饮品
+// 開始搖飲品
 function startShaking() {
     document.getElementById("shaker-container").classList.add("shaking");
     setTimeout(() => {
@@ -84,14 +84,14 @@ function startShaking() {
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
-        apiKey: 'AIzaSyDe1rnIM6BW9D6RMrogKoQ_fSUltZt-wfk', // 您的 Google Sheets API 密钥
+        apiKey: 'AIzaSyDe1rnIM6BW9D6RMrogKoQ_fSUltZt-wfk', // 您的 Google Sheets API 密鑰
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
-        console.log('Google Sheets API initialized');
+        console.log('Google Sheets API 初始化成功');
     });
 });
 
-// 记录按钮点击事件
+// 記錄按鈕點擊事件
 function recordButtonClick(ingredient) {
     liff.getProfile().then(profile => {
         var lineProfile = {
@@ -118,16 +118,16 @@ function recordButtonClick(ingredient) {
         };
 
         gapi.client.sheets.spreadsheets.values.append(params).then(function(response) {
-            console.log('Data recorded successfully in Google Sheets');
+            console.log('數據成功記錄到 Google Sheets 中');
         }, function(reason) {
-            console.error('Error: ' + reason.result.error.message);
+            console.error('錯誤: ' + reason.result.error.message);
         });
     }).catch(err => {
-        console.error('Error getting Line profile', err);
+        console.error('獲取 Line 用戶資料失敗', err);
     });
 }
 
-// 获取 LINE 用户信息
+// 獲取 LINE 用戶信息
 function getLineProfile() {
     if (liff.isLoggedIn()) {
         return {
@@ -137,9 +137,9 @@ function getLineProfile() {
         };
     } else {
         return {
-            userId: 'Not Logged In',
-            displayName: 'Not Logged In',
-            pictureUrl: 'Not Logged In'
+            userId: '未登錄',
+            displayName: '未登錄',
+            pictureUrl: '未登錄'
         };
     }
 }
