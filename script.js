@@ -84,6 +84,7 @@ function startShaking() {
     }, 2000);
 }
 
+
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
@@ -91,8 +92,13 @@ gapi.load('client', function() {
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
         console.log('Google Sheets API 初始化成功');
+        
+        // 在這裡進行您的操作，確保 gapi.client.sheets 已經被正確初始化
+    }).catch(function(error) {
+        console.error('Google Sheets API 初始化失敗', error);
     });
 });
+
 
 // 記錄用戶行為數據
 function recordUserAction(action, ingredient = '') {
@@ -146,3 +152,4 @@ function getLineProfile() {
         };
     }
 }
+
