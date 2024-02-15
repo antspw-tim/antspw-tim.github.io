@@ -43,48 +43,6 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        liff.init({
-            liffId: '2002831974-oaMLXlv9' // 请替换为您的 LIFF ID
-        }).then(() => {
-            if (!liff.isLoggedIn()) {
-                // 用户未登录，显示登录屏幕
-                showLoginScreen();
-            } else {
-                // 用户已登录，获取用户信息
-                liff.getProfile().then(profile => {
-                    // 设置全局变量 window.profile
-                    window.profile = profile;
-                    displayUserInfo(profile);
-                }).catch(err => {
-                    console.error('获取用户资料失败', err);
-                });
-            }
-        }).catch(err => {
-            console.error('LIFF Initialization failed', err);
-        });
-
-        function showLoginScreen() {
-            document.getElementById('login-screen').style.display = 'flex';
-            document.getElementById('game-screen').style.display = 'none';
-        }
-
-        function startGame() {
-            if (!liff.isLoggedIn()) {
-                // 如果用户未登录，引导用户登录
-                liff.login();
-            } else {
-                // 用户已登录，开始游戏
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('game-screen').style.display = 'block';
-            }
-        }
-
-        function displayUserInfo(profile) {
-            document.getElementById('displayName').textContent = profile.displayName;
-            document.getElementById('pictureUrl').src = profile.pictureUrl;
-            // 添加其他用户信息显示
-        }
-    </script>
+    
 </body>
 </html>
