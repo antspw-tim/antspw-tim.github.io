@@ -27,6 +27,7 @@ function showLoginScreen() {
 
 // 開始遊戲
 function startGame() {
+    recordUserAction('startGame');
     if (!liff.isLoggedIn()) {
         // 如果用戶未登錄，引導用戶登錄
         liff.login();
@@ -49,6 +50,7 @@ let drinkIngredients = [];
 
 // 添加飲品成分
 function addIngredient(ingredient, color) {
+    recordUserAction('addIngredient', ingredient);
     drinkIngredients.push(ingredient);
     updateDrinkDisplay();
     animateIngredient(color);
@@ -73,6 +75,7 @@ function animateIngredient(color) {
 
 // 開始搖飲品
 function startShaking() {
+    recordUserAction('startShaking');
     document.getElementById("shaker-container").classList.add("shaking");
     setTimeout(() => {
         document.getElementById("shaker-container").classList.remove("shaking");
@@ -91,8 +94,8 @@ gapi.load('client', function() {
     });
 });
 
-// 記錄按鈕點擊事件
-function recordButtonClick(ingredient) {
+// 記錄用戶行為數據
+function recordUserAction(action, ingredient = '') {
     liff.getProfile().then(profile => {
         var lineProfile = {
             userId: profile.userId,
@@ -102,11 +105,11 @@ function recordButtonClick(ingredient) {
 
         var timestamp = new Date().toLocaleString();
         var values = [
-            [timestamp, profile.displayName, profile.userId, ingredient]
+            [timestamp, profile.displayName, profile.userId, action, ingredient]
         ];
 
         var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w';
-        var range = 'Sheet1!A:D';
+        var range = 'Sheet1!A:E';
 
         var params = {
             spreadsheetId: spreadsheetId,
