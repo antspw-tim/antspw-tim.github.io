@@ -84,7 +84,6 @@ function startShaking() {
     }, 2000);
 }
 
-
 // Google Sheets API 初始化
 gapi.load('client', function() {
     gapi.client.init({
@@ -105,46 +104,39 @@ gapi.load('client', function() {
 
 // 記錄用戶行為數據
 function recordUserAction(action, ingredient = '') {
-    // Ensure gapi.client.sheets is defined before using it
-    if (gapi.client.sheets) {
-        liff.getProfile().then(profile => {
-            var lineProfile = {
-                userId: profile.userId,
-                displayName: profile.displayName,
-                pictureUrl: profile.pictureUrl
-            };
+    liff.getProfile().then(profile => {
+        var lineProfile = {
+            userId: profile.userId,
+            displayName: profile.displayName,
+            pictureUrl: profile.pictureUrl
+        };
 
-            var timestamp = new Date().toLocaleString();
-            var values = [
-                [timestamp, profile.displayName, profile.userId, action, ingredient]
-            ];
+        var timestamp = new Date().toLocaleString();
+        var values = [
+            [timestamp, profile.displayName, profile.userId, action, ingredient]
+        ];
 
-            var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w';
-            var range = 'Sheet1!A:E';
+        var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w';
+        var range = 'Sheet1!A:E';
 
-            var params = {
-                spreadsheetId: spreadsheetId,
-                range: range,
-                valueInputOption: 'USER_ENTERED',
-                resource: {
-                    values: values
-                }
-            };
+        var params = {
+            spreadsheetId: spreadsheetId,
+            range: range,
+            valueInputOption: 'USER_ENTERED',
+            resource: {
+                values: values
+            }
+        };
 
-            gapi.client.sheets.spreadsheets.values.append(params).then(function(response) {
-                console.log('數據成功記錄到 Google Sheets 中');
-            }, function(reason) {
-                console.error('錯誤: ' + reason.result.error.message);
-            });
-        }).catch(err => {
-            console.error('獲取 Line 用戶資料失敗', err);
+        gapi.client.sheets.spreadsheets.values.append(params).then(function(response) {
+            console.log('數據成功記錄到 Google Sheets 中');
+        }, function(reason) {
+            console.error('錯誤: ' + reason.result.error.message);
         });
-    } else {
-        // Handle the case where gapi.client.sheets is not defined yet
-        console.error('Google Sheets API 未加载完成');
-    }
+    }).catch(err => {
+        console.error('獲取 Line 用戶資料失敗', err);
+    });
 }
-
 
 // 獲取 LINE 用戶信息
 function getLineProfile() {
@@ -162,4 +154,3 @@ function getLineProfile() {
         };
     }
 }
-
