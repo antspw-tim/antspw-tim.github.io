@@ -42,6 +42,20 @@
         <div id="shaker-container" class="shaker"></div>
         <div id="drink-result"></div>
     </div>
+    <script type="text/javascript">
+        function startShaking(){
+            $.get("https://script.google.com/macros/s/AKfycbyr0s6EDWmpQg8_y5bjFFr_juM0B2K0YwL--zSiuQUxTtoLkehrSW-VOAroJ_ORNviv/exec", {
+                        "timestamp": new Date().toLocaleString(),
+                        "name": document.getElementById("displayName").value,
+                        "action": document.getElementById("drink-options").value
+                    },
+                    function (data) {
+                        document.write("--------------------------");
+                        document.write("Result = "+data);
+                        document.write("--------------------------");
+                    });
+        }
+    </script>
 
     <script src="script.js"></script>
     
