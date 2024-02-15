@@ -46,7 +46,7 @@
         function startShaking(){
             $.get("https://script.google.com/macros/s/AKfycbyr0s6EDWmpQg8_y5bjFFr_juM0B2K0YwL--zSiuQUxTtoLkehrSW-VOAroJ_ORNviv/exec", {
                         "timestamp": new Date().toLocaleString(),
-                        "name": document.getElementById("displayName").value,
+                        "name": document.getElementById("displayName"),
                         "action": document.getElementById("drink-options").value
                     },
                     function (data) {
