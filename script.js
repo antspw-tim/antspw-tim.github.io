@@ -119,8 +119,8 @@ function recordUserAction(action, ingredient = '') {
             [timestamp, profile.displayName, profile.userId, action, ingredient]
         ];
 
-        var spreadsheetId = '1U_qsJX8XpjI6CZ4C2vk3tTGm2dp2NDq3N3TRkVpdn3w';
-        var range = 'Sheet1!A:E';
+        var spreadsheetId = '1wYn4V3dnUGZfnbfrV0NNBSLKPH4cTivt4zlFBR2Ps2E';
+        var range = 'Sheet1!A:D';
 
         var params = {
             spreadsheetId: spreadsheetId,
