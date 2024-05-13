@@ -1,26 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蟻力手作</title>
-    <link rel="stylesheet" href="styles.css">
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-</head>
-<body>
-    <!-- 登录屏幕 -->
-    <div id="login-screen" class="screen">
-        <img src="ants_start.png" alt="登入" onclick="startGame()">
-    </div>
-
-    <!-- 游戏屏幕 -->
-    <div id="game-screen" class="screen" style="display: none;">
-        <div id="user-info">
-            <img id="pictureUrl" src="" alt="Profile Picture" />
-            <span id="displayName"></span>
-        </div>
-        <h1>蟻力手作工坊</h1>
-    <video class="_root_170ai_1 _default_170ai_40" src="https://asset.ai-amaze.com/tbd/idle.webm" autoplay="" preload="auto" loop="" playsinline=""></video>
     <script type="module">
         import { render } from "https://chat.ai-amaze.com/messenger.mjs";
         const chatWidgetOptions = {
@@ -35,6 +12,3 @@
         };
         render(chatWidgetOptions);
       </script>
-    <script src="script.js"></script>
-</body>
-</html>
